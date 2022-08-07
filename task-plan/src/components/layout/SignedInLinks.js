@@ -1,14 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SignedInLinks = () => {
+function SignedInLinks() {
     return (
         <ul className="right">
-            <li><NavLink to="/">Create Task</NavLink></li>
-            <li><NavLink to="/">Log Out</NavLink></li>
-            <li><NavLink to="/" className="btn btn-floating blue-grey">MI</NavLink></li>
+            <li>
+                <NavLink to="/create-task">New Task</NavLink>
+            </li>
+            <li>
+                <NavLink to="/">Sign Out</NavLink>
+            </li>
+            <li>
+                <NavLink to="/" className="waves-effect waves-light btn btn-floating grey">
+                    MI
+                </NavLink>
+            </li>
         </ul>
     );
-}
+};
 
 export default SignedInLinks;
