@@ -25,14 +25,15 @@ form {
     margin-top: 30px;
 }
 
-form button, form h5 {
+form button,
+form h5 {
     margin: 5px;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: teal;
-  box-shadow: none;
+    border-color: teal;
+    box-shadow: none;
 }

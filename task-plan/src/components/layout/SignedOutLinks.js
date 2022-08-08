@@ -12,6 +12,6 @@ function SignedOutLinks() {
             </li>
         </ul>
     );
-};
+}
 
 export default SignedOutLinks;

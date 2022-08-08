@@ -6,6 +6,6 @@ function Notifications() {
             <p>Notifications</p>
         </div>
     );
-};
+}
 
 export default Notifications;

@@ -11,12 +11,15 @@ function SignedInLinks() {
                 <NavLink to="/">Sign Out</NavLink>
             </li>
             <li>
-                <NavLink to="/" className="waves-effect waves-light btn btn-floating grey">
+                <NavLink
+                    to="/"
+                    className="waves-effect waves-light btn btn-floating grey"
+                >
                     MI
                 </NavLink>
             </li>
         </ul>
     );
-};
+}
 
 export default SignedInLinks;
