@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TaskList from "../tasks/TaskList";
 import Notifications from "./Notifications";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 class Dashboard extends Component {
     state = {};
@@ -24,8 +26,15 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.task.tasks,
+        tasks: state.firestore.ordered.tasks,
     };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        {
+            collection: "tasks",
+        },
+    ])
+)(Dashboard);
