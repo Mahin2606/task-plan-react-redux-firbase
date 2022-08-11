@@ -15,3 +15,4 @@ firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true, merge: true });
 
 export default firebase;
+ 

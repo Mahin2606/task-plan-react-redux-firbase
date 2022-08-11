@@ -4,11 +4,15 @@ import Notifications from "./Notifications";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { Navigate } from "react-router-dom";
 
 class Dashboard extends Component {
     state = {};
     render() {
-        const { tasks } = this.props;
+        const { tasks, auth } = this.props;
+        if (!auth.uid) {
+            return <Navigate to="/signin" />;
+        }
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -27,6 +31,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     return {
         tasks: state.firestore.ordered.tasks,
+        auth: state.firebase.auth,
     };
 };
 

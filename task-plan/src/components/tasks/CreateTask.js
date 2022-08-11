@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { createTask } from "../../store/actions/taskActions";
 
 class CreateTask extends Component {
@@ -17,6 +18,10 @@ class CreateTask extends Component {
         this.props.createTask(this.state);
     };
     render() {
+        const { auth } = this.props;
+        if (!auth.uid) {
+            return <Navigate to="/signin" />;
+        }
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit}>
@@ -50,10 +55,16 @@ class CreateTask extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+    };
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createTask: (task) => dispatch(createTask(task)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(CreateTask);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);

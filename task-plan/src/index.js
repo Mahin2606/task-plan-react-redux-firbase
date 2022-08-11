@@ -8,11 +8,12 @@ import {
     compose,
 } from "redux";
 import rootReducer from "./reducers/rootReducer";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import thunk from "redux-thunk";
 import { createFirestoreInstance, getFirestore } from "redux-firestore";
 import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import firebase from "./config/fbConfig";
+import { isLoaded } from "react-redux-firebase";
 
 const store = createStore(
     rootReducer,
@@ -22,7 +23,7 @@ const store = createStore(
 );
 
 const rrfConfig = {
-    userProfile: "users",
+    // userProfile: "users",
 };
 
 const rrfProps = {
@@ -32,11 +33,19 @@ const rrfProps = {
     createFirestoreInstance,
 };
 
+function AuthIsLoaded({ children }) {
+    const auth = useSelector((state) => state.firebase.auth);
+    if (!isLoaded(auth)) return <div></div>;
+    return children;
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rrfProps}>
-            <App />
+            <AuthIsLoaded>
+                <App />
+            </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
     </Provider>
 );
