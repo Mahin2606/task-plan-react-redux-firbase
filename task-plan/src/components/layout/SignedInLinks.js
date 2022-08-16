@@ -17,7 +17,7 @@ function SignedInLinks(props) {
                     to="/"
                     className="waves-effect waves-light btn btn-floating grey"
                 >
-                    MI
+                    {props.profile.initials}
                 </NavLink>
             </li>
         </ul>

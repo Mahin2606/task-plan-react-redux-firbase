@@ -1,13 +1,15 @@
 export const createTask = (task) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorID = getState().firebase.auth.uid;
         firestore
             .collection("tasks")
             .add({
                 ...task,
-                authorFirstName: "Mahin",
-                authorLastName: "Islam",
-                authorId: 12345,
+                authorFirstName: profile.firstName,
+                authorLastName: profile.lastName,
+                authorId: authorID,
                 createdAt: new Date(),
             })
             .then(() => {

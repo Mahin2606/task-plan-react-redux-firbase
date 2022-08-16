@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 
-const withRouter = (Component) => (props) => {
+const withRouterParams = (Component) => (props) => {
     const params = useParams();
     return <Component {...props} {...{params}} />;
 };
 
-export default withRouter;
+export default withRouterParams;

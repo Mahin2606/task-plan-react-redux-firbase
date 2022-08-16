@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import withRouter from "../../misc/withRouter";
+import withRouterParams from "../../misc/withRouterParams";
 
 function TaskDetails(props) {
     const { task, auth } = props;
@@ -48,7 +48,7 @@ const mapStateToProps = (state, { params }) => {
 };
 
 export default compose(
-    withRouter,
+    withRouterParams,
     connect(mapStateToProps),
     firestoreConnect([
         {
