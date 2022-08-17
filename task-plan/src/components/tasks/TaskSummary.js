@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 function TaskSummary({ task }) {
     return (
@@ -8,7 +9,7 @@ function TaskSummary({ task }) {
                 <p>
                     Posted By {task.authorFirstName} {task.authorLastName}
                 </p>
-                <p className="grey-text">8th August, 2022, 03:08 PM.</p>
+                <p className="grey-text">{moment(task.createdAt.toDate()).calendar()}</p>
             </div>
         </div>
     );

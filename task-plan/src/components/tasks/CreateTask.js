@@ -1,70 +1,61 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createTask } from "../../store/actions/taskActions";
 
-class CreateTask extends Component {
-    state = {
-        title: "",
-        content: "",
-    };
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value,
-        });
-    };
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.createTask(this.state);
-    };
-    render() {
-        const { auth } = this.props;
+function CreateTask() {
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = useSelector((state) => state.firebase.auth);
+
+    useEffect(() => {
         if (!auth.uid) {
-            return <Navigate to="/signin" />;
+            navigate("/signin");
         }
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <h5 className="grey-text text-darken-3">Create New Task</h5>
-                    <div className="input-field">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="content">Task Content</label>
-                        <textarea
-                            className="materialize-textarea"
-                            name="content"
-                            id="content"
-                            onChange={this.handleChange}
-                        ></textarea>
-                    </div>
-                    <div className="input-field">
-                        <button className="waves-effect waves-light btn grey darken-3 z-depth-0">
-                            Create
-                        </button>
-                    </div>
-                </form>
-            </div>
-        );
-    }
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        try {
+            dispatch(createTask({ title, content }));
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return (
+        <div className="container">
+            <form onSubmit={handleSubmit}>
+                <h5 className="grey-text text-darken-3">Create New Task</h5>
+                <div className="input-field">
+                    <label htmlFor="title">Title</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
+                <div className="input-field">
+                    <label htmlFor="content">Task Content</label>
+                    <textarea
+                        className="materialize-textarea"
+                        name="content"
+                        id="content"
+                        onChange={(e) => setContent(e.target.value)}
+                    ></textarea>
+                </div>
+                <div className="input-field">
+                    <button className="waves-effect waves-light btn grey darken-3 z-depth-0">
+                        Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.firebase.auth,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createTask: (task) => dispatch(createTask(task)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);
+export default CreateTask;

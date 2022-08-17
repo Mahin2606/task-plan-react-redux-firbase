@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import withRouterParams from "../../misc/withRouterParams";
+import moment from "moment";
 
 function TaskDetails(props) {
     const { task, auth } = props;
@@ -23,7 +24,7 @@ function TaskDetails(props) {
                             Posted By {task.authorFirstName}{" "}
                             {task.authorLastName}
                         </div>
-                        <div>8th August, 2022, 03:48 PM.</div>
+                        <div>{moment(task.createdAt.toDate()).calendar()}</div>
                     </div>
                 </div>
             </div>
