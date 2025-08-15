@@ -7,12 +7,17 @@ const initState = {
 };
 
 const taskReducer = (state = initState, action) => {
-    sdhf kajdhf audshfkja akjsdhf
     switch (action.type) {
         case 'CREATE_TASK':
             return state;
         
         case 'CREATE_TASK_ERROR':
+            return state;
+
+        case 'UPDATE_TASK':
+            return state;
+
+        case 'UPDATE_TASK_ERROR':
             return state;
     
         default:
