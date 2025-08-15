@@ -13,6 +13,12 @@ const taskReducer = (state = initState, action) => {
         
         case 'CREATE_TASK_ERROR':
             return state;
+
+        case 'UPDATE_TASK':
+            return state;
+
+        case 'UPDATE_TASK_ERROR':
+            return state;
     
         default:
             return state;
